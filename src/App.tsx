@@ -1,7 +1,6 @@
 import React, {useRef, useState} from 'react'
 import ReactDOM from 'react-dom'
-import './base.css'
-import './index.css'
+import "todomvc-app-css/index.css"
 import TodoInput from './container/TodoInput'
 import TodoList from './container/TodoList'
 import TodoFilter from './container/TodoFilter'

@@ -17,7 +17,8 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router": "^5.0.1",
-    "react-router-dom": "^5.0.1"
+    "react-router-dom": "^5.0.1",
+    "todomvc-app-css": "^2.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",
@@ -35,7 +36,6 @@
   },
   "scripts": {
     "dev": "webpack-dev-server --config ./webpack.config.js",
-    "build" : "webpack"
+    "build": "webpack"
   }
-
 }

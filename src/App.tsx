@@ -22,11 +22,36 @@ const Todo: React.FunctionComponent = () => {
         setTodoList([...todoList, todo]);
     };
 
+    const complete = (id:number) => {
+        todoList
+            .filter(_ => _.id === id)
+            .map(_ => {
+               if(_.status === TodoStatus.ACTIVE) {
+                   _.status = TodoStatus.COMPLETED;
+                   return;
+               }
+
+               if(_.status === TodoStatus.COMPLETED) {
+                   _.status = TodoStatus.ACTIVE;
+                   return;
+               }
+            });
+        setTodoList(todoList)
+    };
+
+    const destroy = (id:number) => {
+        setTodoList(todoList.filter(_ => _.id !== id));
+    };
+
+    const activeLeftSize = () => {
+        return todoList.filter(_ => _.status === TodoStatus.ACTIVE).length;
+    };
+
     return  (
         <section className="todoapp">
             <TodoInput todoList={todoList} addTodo={addTodo}/>
-            <TodoList todoList={todoList} />
-            <TodoFilter todoList={todoList}/>
+            <TodoList todoList={todoList} destroy={destroy} complete={complete}/>
+            <TodoFilter todoList={todoList} activeTodoLeft={activeLeftSize}/>
         </section>
     )
 };

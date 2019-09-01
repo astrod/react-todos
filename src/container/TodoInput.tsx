@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, { useState } from "react"
 
 const TodoInput: React.FunctionComponent = props => {
 
@@ -8,10 +8,10 @@ const TodoInput: React.FunctionComponent = props => {
 
         const value = e.target.value;
 
-        if(value === "undefined" || value === "") {
+        if (value === "undefined" || value === "") {
             return;
         }
-        if(e.key !== 'Enter') {
+        if (e.key !== 'Enter') {
             return;
         }
 
@@ -28,7 +28,7 @@ const TodoInput: React.FunctionComponent = props => {
             <div>
                 <header className="header">
                     <h1>todos</h1>
-                    <input className="new-todo" placeholder="What needs to be done?" onKeyPress={handlePress} onChange={handleChange} value={inputValue}  />
+                    <input className="new-todo" placeholder="What needs to be done?" onKeyPress={handlePress} onChange={handleChange} value={inputValue} />
                 </header>
             </div>
         </div>

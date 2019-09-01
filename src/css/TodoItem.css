@@ -1,0 +1,47 @@
+.todo-list li label {
+    padding-left: 70px;
+}
+.todo-list li.completed label {
+    padding-left: 50px;
+}
+
+.todo-list li .star,
+.todo-list li .unstar {
+    position: absolute;
+    top: 0;
+    left: 45px;
+    bottom: 0;
+    height: 40px;
+    margin: auto 0;
+    font-size: 25px;
+    color: #cc9a9a;
+    margin-bottom: 11px;
+    transition: color 0.2s ease-out;
+    cursor: pointer;
+}
+.todo-list li .star {
+    display: block;
+}
+
+.todo-list li .star:hover,
+.todo-list li .unstar:hover {
+    color: #af5b5e;
+}
+
+.todo-list li .star:before,
+.todo-list li .unstar:before {
+    display: inline-block;
+    content: "";
+    height: 35px;
+    vertical-align: bottom;
+}
+
+.todo-list li .star:after {
+    content: "★";
+    vertical-align: bottom;
+}
+
+.todo-list li .unstar:after {
+    content: "☆";
+    vertical-align: bottom;
+}

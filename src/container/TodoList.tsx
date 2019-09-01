@@ -1,16 +1,8 @@
 import React from "react"
 import FilterStatus from "./FilterStatus"
+import TodoItem from "./TodoItem"
 
 const TodoList: React.FunctionComponent = props => {
-
-    const handleClick = (e, id:number) => {
-       e.preventDefault();
-       props.destroy(id);
-    };
-
-    const handleComplete = (id:number) => {
-        props.complete(id);
-    };
 
     const handleAllComplete = () => {
         props.allComplete();
@@ -31,15 +23,7 @@ const TodoList: React.FunctionComponent = props => {
             <ul className="todo-list">
                 {props.todoList
                     .filter(filterByFilterStatus)
-                    .map(todo => (
-                        <li key={todo.id} className={todo.status ? "completed" : undefined}>
-                            <div className="view">
-                                <input className="toggle" type="checkbox" checked={Boolean(todo.status)} onChange={() => handleComplete(todo.id)}/>
-                                <label>{todo.title}</label>
-                                <button className="destroy" onClick={(e)=> handleClick(e, todo.id)}></button>
-                            </div>
-                        </li>
-                ))}
+                    .map(todo => <TodoItem todo={todo} destroy={props.destroy} complete={props.complete} key={todo.id} updateTodo={props.updateTodo} starTodo={props.starTodo} />)}
             </ul>
         </section>
     );

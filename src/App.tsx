@@ -11,6 +11,7 @@ const Todo: React.FunctionComponent = () => {
 
     const refTodoNumber = useRef<number>(0);
     const [todoList, setTodoList] = useState([]);
+    const [starTodoList, setStarTodoList] = useState([]);
     const [filterStatus, setFilterStatus] = useState<FilterStatus>(FilterStatus.ALL);
 
     const addTodo = (title: string) => {
@@ -18,7 +19,8 @@ const Todo: React.FunctionComponent = () => {
         const todo = {
             id : ++refTodoNumber.current,
             status : TodoStatus.ACTIVE,
-            title : title
+            title : title,
+            star : false
         };
 
         setTodoList([...todoList, todo]);
@@ -73,11 +75,34 @@ const Todo: React.FunctionComponent = () => {
         });
     };
 
+    const updateTodo = (nextTodo) => {
+        const nextTodoList = todoList.map(_ => {
+            if(_ => _.id === nextTodo.id) {
+                return nextTodo;
+            }
+
+            return _;
+        })
+
+        setTodoList(nextTodoList);
+    }
+
+    const starTodo = (targetTodo) => {
+        const todo = todoList.filter(_ => _.id === targetTodo.id);
+        todo.star = true;
+
+        const idx = todoList.findIndex(_ => _.id === targetTodo.id);
+        todoList.splice(idx, 1);
+
+        setTodoList(todoList);
+        setStarTodoList(todo, ...starTodoList);
+    }
+
     return  (
         <section className="todoapp">
-            <TodoInput todoList={todoList} addTodo={addTodo} />
-            <TodoList todoList={todoList} destroy={destroy} complete={complete} allComplete={allComplete} filterStatus={filterStatus}/>
-            <TodoFilter todoList={todoList} activeTodoLeft={activeLeftSize()} filterStatus={filterStatus} setFilterStatus={setFilterStatus}/>
+            <TodoInput todoList={starTodoList.concat(todoList)} addTodo={addTodo} />
+            <TodoList todoList={starTodoList.concat(todoList)} destroy={destroy} complete={complete} allComplete={allComplete} filterStatus={filterStatus} updateTodo={updateTodo} starTodo={starTodo}/>
+            <TodoFilter todoList={starTodoList.concat(todoList)} activeTodoLeft={activeLeftSize()} filterStatus={filterStatus} setFilterStatus={setFilterStatus} />
         </section>
     )
 };

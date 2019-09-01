@@ -53,7 +53,7 @@ const Todo: React.FunctionComponent = () => {
     };
 
     const allComplete = () => {
-        const alreadyAllCompleted = todoList.filter(_ => _.status === TodoStatus.ACTIVE).length === 0;
+        const alreadyAllCompleted = todoList.every(_ => _.status === TodoStatus.COMPLETED);
         const nextTodoList = makeNextTodoList(alreadyAllCompleted);
 
         setTodoList(nextTodoList);

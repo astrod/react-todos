@@ -7,8 +7,11 @@ const TodoFilter: React.FunctionComponent = props => {
         return props.filterStatus === currentFilterStatus ? "selected" : undefined;
     };
 
-    const handleClick = (nextFilterStatus:FilterStatus) => {
-        props.setFilterStatus(nextFilterStatus);
+    const createClickFilterStatusHandler = (nextFilterStatus:FilterStatus):React.MouseEventHandler => {
+        return event => {
+            event.preventDefault();
+            props.setFilterStatus(nextFilterStatus);
+        }
     };
 
     return (
@@ -18,24 +21,15 @@ const TodoFilter: React.FunctionComponent = props => {
         </span>
             <ul className="filters">
                 <li>
-                    <a href="#/" className={isSelected(FilterStatus.ALL)} onClick={(e) => {
-                        e.preventDefault();
-                        handleClick(FilterStatus.ALL)
-                    }}>All</a>
+                    <a href="#/" className={isSelected(FilterStatus.ALL)} onClick={createClickFilterStatusHandler(FilterStatus.ALL)}>All</a>
                 </li>
                 {' '}
                 <li>
-                    <a href="#/active" className={isSelected(FilterStatus.ACTIVE)} onClick={(e) => {
-                        e.preventDefault();
-                        handleClick(FilterStatus.ACTIVE)
-                    }}>Active</a>
-                </li>
+                    <a href="#/active" className={isSelected(FilterStatus.ACTIVE)} onClick={createClickFilterStatusHandler(FilterStatus.ACTIVE)}>Active</a>
+                    </li>
                 {' '}
                 <li>
-                    <a href="#/completed" className={isSelected(FilterStatus.COMPLETED)} onClick={(e) => {
-                        e.preventDefault();
-                        handleClick(FilterStatus.COMPLETED)
-                    }}>Completed</a>
+                    <a href="#/completed" className={isSelected(FilterStatus.COMPLETED)} onClick={createClickFilterStatusHandler(FilterStatus.COMPLETED)}>Completed</a>
                 </li>
             </ul>
         </footer>
